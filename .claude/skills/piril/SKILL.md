@@ -19,7 +19,10 @@ Tek dosyalık HTML5 canvas platform oyunu: `piril/index.html`. Dış bağımlıl
 - 1. bölüm çift zıplama olmadan geçilebilmeli (ödül END parçasında verilir).
 
 ## Kod haritası (bölüm başlıkları)
-`KAYIT` (localStorage `piril-v1`), `HARİTA PARÇALARI`, `BÖLÜMLER`, `SES` (ortam drone + efektler), `DURUM`, `GİRDİ` (Up=zıpla, Enter/X=vur, ↓=kay; TV uyumu), `FİZİK` (`stepPlayer`: koyote, zıplama tamponu, değişken yükseklik, duvar kayma/zıplama, sarmaşık, kayma, süzülme, rüzgâr), `DÜŞMANLAR` (`stepEnts`), `BOSS` (`stepBoss`: spore → open → slam → open döngüsü, yarı canda 2. faz), `ÇİZİM` (paralaks `layer`, arazi bölütü `seg` önbelleği, `drawPiril`, `drawEnt`, `drawBoss`, ışık haritası `LM`), `AKIŞ`, `DÖNGÜ` (120 Hz sabit adım, hitstop).
+`KAYIT` (localStorage `piril-v1`), `HARİTA PARÇALARI`, `BÖLÜMLER`, `SES` (ortam drone + efektler), `DURUM`, `GİRDİ` (klavye + dokunmatik çubuk/düğmeler + Gamepad API birleşir; `syncKeys` her kare `keys`'i yeniden kurar, `press()` basış anlarını kuyruklar; `tvMode()`: Enter=zıpla ve otomatik vuruş; ayarlar `save.ctl`/`save.auto`/`save.vib`), `FİZİK` (`stepPlayer`: koyote, zıplama tamponu, değişken yükseklik, duvar kayma/zıplama, sarmaşık, kayma, süzülme, rüzgâr), `DÜŞMANLAR` (`stepEnts`), `BOSS` (`stepBoss`: spore → open → slam → open döngüsü, yarı canda 2. faz), `ÇİZİM` (paralaks `layer`, arazi bölütü `seg` önbelleği, `drawPiril`, `drawEnt`, `drawBoss`, ışık haritası `LM`), `AKIŞ`, `DÖNGÜ` (120 Hz sabit adım, hitstop).
+
+## Kontrol hissi
+Koyote 0.12 s, zıplama tamponu 0.15 s, vuruş/kayma tamponu, tepe süzülmesi (basılıyken |vy|<95 yerçekimi ×0.55), hızlı düşüş ×1.15, köşe düzeltme (tavana çarpınca 9 px yana kay), kenar yardımı (8 px yukarı adım), duvara kendiliğinden tutunma, sarmaşığı havada kendiliğinden yakalama. Klavyede ↑ zıplamaz.
 
 ## Görsel tarz
 Ön planda bölüm renginde koyu siluet arazi + parlayan yosun kenarı (`pal.rim`), arkada sise gömülmüş 3 paralaks katman, karanlık bölümlerde `destination-out` ışık haritası, ateş böcekleri/yaprak/yıldız ortam parçacıkları, bulanık ön plan yaprakları, vinyet. Yeni nesneler bu dili izlemeli: siluet + kenar ışığı + additive parıltı.
